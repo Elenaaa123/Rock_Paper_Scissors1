@@ -11,7 +11,8 @@ function capitalizeFirstLetter(string) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase().trim();
+  playerSelection = playerSelection.trim().toLowerCase();
+  computerSelection = computerSelection.toLowerCase();
 
   if (playerSelection === computerSelection) {
     return "It's a tie!";
@@ -51,7 +52,9 @@ function game() {
 
     while (
       playerSelection.trim() === '' ||
-      !['rock', 'paper', 'scissors'].includes(playerSelection.toLowerCase())
+      !['rock', 'paper', 'scissors'].includes(
+        playerSelection.toLowerCase().trim()
+      )
     ) {
       playerSelection = prompt(
         `Invalid input. Round ${i + 1}:\nEnter Rock, Paper, or Scissors:`
