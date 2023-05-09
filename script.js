@@ -1,6 +1,7 @@
 window.alert(
-  `Hello everyone! Let/s play the game 'Rock, Paper, Scissors' You have 5 rounds! Good luck!`
+  `Hello everyone! Let's play the game 'Rock, Paper, Scissors' You have 5 rounds! Good luck!`
 );
+
 function computerPlay() {
   const choices = ['Rock', 'Paper', 'Scissors'];
   return choices[Math.floor(Math.random() * choices.length)];
@@ -36,33 +37,35 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function getPlayerSelection(roundNumber) {
+  let playerSelection = prompt(`Round ${roundNumber}:\nEnter Rock, Paper, or Scissors:`);
+
+  while (
+    playerSelection === null ||
+    playerSelection.trim() === '' ||
+    !['rock', 'paper', 'scissors'].includes(
+      playerSelection.toLowerCase().trim()
+    )
+  ) {
+    if (playerSelection === null) {
+      alert('User cancelled the game.');
+      return null;
+    }
+    playerSelection = prompt(`Invalid input. Round ${roundNumber}:\nEnter Rock, Paper, or Scissors:`);
+  }
+
+  return playerSelection;
+}
+
 function game() {
   let playerScore = 0;
   let computerScore = 0;
 
   for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt(
-      `Round ${i + 1}:\nEnter Rock, Paper, or Scissors:`
-    );
+    const playerSelection = getPlayerSelection(i + 1);
 
-    if (playerSelection === null) {
-      alert('User cancelled the game.');
+    if (!playerSelection) {
       return;
-    }
-
-    while (
-      playerSelection.trim() === '' ||
-      !['rock', 'paper', 'scissors'].includes(
-        playerSelection.toLowerCase().trim()
-      )
-    ) {
-      playerSelection = prompt(
-        `Invalid input. Round ${i + 1}:\nEnter Rock, Paper, or Scissors:`
-      );
-      if (playerSelection === null) {
-        alert('User cancelled the game.');
-        return;
-      }
     }
 
     const computerSelection = computerPlay();
